@@ -1,0 +1,15 @@
+﻿  Aim.cpp
+Aim.cpp(15): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Game.cpp
+  GameField.cpp
+  Image_manager.cpp
+  Invader.cpp
+Invader.cpp(20): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Main.cpp
+  Player.cpp
+  Target.cpp
+  Generating code
+  All 543 functions were compiled because no usable IPDB/IOBJ from previous compilation was found.
+  Finished generating code
+  Invaders.vcxproj -> D:\project\visual\Invaders2\Release\Invaders.exe
+  Invaders.vcxproj -> D:\project\visual\Invaders2\Release\Invaders.pdb (Full PDB)

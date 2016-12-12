@@ -1,0 +1,20 @@
+﻿  Weapon.cpp
+  Target.cpp
+  Shotgun.cpp
+  Player.cpp
+  Main.cpp
+  Invader.cpp
+  Image_manager.cpp
+  InvaderManager.cpp
+  Invader2.cpp
+  Gun.cpp
+  GameField.cpp
+  Game.cpp
+  Car.cpp
+d:\project\visual\invaders\invaders\car.cpp(48): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Bullet.cpp
+  Aim.cpp
+d:\project\visual\invaders\invaders\aim.cpp(16): warning C4244: 'argument': conversion from 'int' to 'float', possible loss of data
+  Generating Code...
+  Invaders.vcxproj -> D:\project\visual\Invaders\Debug\Invaders.exe
+  Invaders.vcxproj -> D:\project\visual\Invaders\Debug\Invaders.pdb (Full PDB)

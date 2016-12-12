@@ -1,0 +1,146 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Image Files">
+      <UniqueIdentifier>{ded884ca-d7f6-48fc-8cf0-99640e67f5bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player">
+      <UniqueIdentifier>{27f795bd-e0bc-4e6f-bff0-b4d91c07f274}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Target Files">
+      <UniqueIdentifier>{8f3d1a75-81a0-457a-84b6-888577e283ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Weapon Files">
+      <UniqueIdentifier>{1b8b8f51-f5df-4f8e-9d65-2cd9f9663a6e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Image Files">
+      <UniqueIdentifier>{3729e25d-0315-4610-bb7d-4eed74d601d7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Target Files">
+      <UniqueIdentifier>{b9d8b8d3-6f05-41c7-811f-fbba01a817da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player">
+      <UniqueIdentifier>{d1c30fa7-4d7a-43ad-b3c4-940895d76ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Weapon Files">
+      <UniqueIdentifier>{68ca57b5-a7d0-41d8-98e3-16f0906a3e3f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Invader.cpp">
+      <Filter>Source Files\Target Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>Source Files\Target Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Image_manager.cpp">
+      <Filter>Source Files\Image Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Aim.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+    <ClCompile Include="InvaderManager.cpp">
+      <Filter>Source Files\Target Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Weapon.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gun.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Shotgun.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Invader2.cpp">
+      <Filter>Source Files\Target Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameField.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Car.cpp">
+      <Filter>Source Files\Player</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invader.h">
+      <Filter>Header Files\Target Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>Header Files\Target Files</Filter>
+    </ClInclude>
+    <ClInclude Include="image_manager.h">
+      <Filter>Header Files\Image Files</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteNames.h">
+      <Filter>Header Files\Image Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>Header Files\Image Files</Filter>
+    </ClInclude>
+    <ClInclude Include="resource.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Aim.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="GameField.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="InvaderManager.h">
+      <Filter>Header Files\Target Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Weapon.h">
+      <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.h">
+      <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Gun.h">
+      <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Shotgun.h">
+      <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Invader2.h">
+      <Filter>Header Files\Target Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Car.h">
+      <Filter>Header Files\Player</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="Invaders.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
+  </ItemGroup>
+</Project>
