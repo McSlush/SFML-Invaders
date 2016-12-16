@@ -84,6 +84,12 @@
     <ClCompile Include="Car.cpp">
       <Filter>Source Files\Player</Filter>
     </ClCompile>
+    <ClCompile Include="BulletManager.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
+    <ClCompile Include="WeaponManager.cpp">
+      <Filter>Source Files\Weapon Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Game.h">
@@ -96,9 +102,6 @@
       <Filter>Header Files\Target Files</Filter>
     </ClInclude>
     <ClInclude Include="image_manager.h">
-      <Filter>Header Files\Image Files</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteNames.h">
       <Filter>Header Files\Image Files</Filter>
     </ClInclude>
     <ClInclude Include="Image.h">
@@ -136,6 +139,12 @@
     </ClInclude>
     <ClInclude Include="Car.h">
       <Filter>Header Files\Player</Filter>
+    </ClInclude>
+    <ClInclude Include="BulletManager.h">
+      <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="WeaponManager.h">
+      <Filter>Header Files\Weapon Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -7,31 +7,24 @@
 
 #include "image_manager.h"
 #include "InvaderManager.h"
-#include "Invader.h"
-#include "SpriteNames.h"
 #include "GameField.h"
 #include "Player.h"
-#include "Bullet.h"
 #include "Image.h"
+#include "BulletManager.h"
 
 class Game : public sf::Drawable {
 private:
-	float gameTime;
-	//GameField* gameField;
+	float curTime, totTime;
 	image_manager imgMgr;
-	SpriteNames spriteNames;
-	vector<string> names;
-	//InvaderManager* invMgr;
-	unique_ptr<Player> player;
-	vector<shared_ptr<Bullet>> bullets;
-	//unique_ptr<Bullet> bullet;
-	vector<shared_ptr<Invader>> invaders;
-	unique_ptr<GameField> gameField;
-	//unique_ptr<Invader> invader;
+	InvaderManager* invMgr;
+	BulletManager* bulMgr;
+	GameField* gameField;
+	Player* player;
 
 	void collisionDetection();
-	void updateBullets(float td);
-	void updateInvaders(float td);
+	//TODO needed?
+	void updateBullets();
+	void updateInvaders();
 
 public:
 	Game();
@@ -42,6 +35,5 @@ public:
 	void changeWeapon(int weaponChoice);
 	void moveCar(int direction);
 
-	//vector<Bullet*> getBullets() { return bullets; }
-	void Game::update(float td, sf::Vector2i mouseCoordinates);
+	void Game::update(float curTime, sf::Vector2i mouseCoordinates);
 };

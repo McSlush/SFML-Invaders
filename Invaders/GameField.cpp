@@ -7,6 +7,7 @@ using namespace std;
 GameField::GameField(image_manager& imgMgr, int playerHp) {
 	this->imgMgr = imgMgr;
 	this->playerHp = playerHp;
+	this->score = 0;
 	initSprite();
 	loadFont();
 }
@@ -41,17 +42,22 @@ void GameField::loadFont() {
 	textHp.setCharacterSize(24);
 	textHp.setFillColor(sf::Color::Yellow);
 	textHp.setPosition(0, 550);
+
+	textScore.setFont(font);
+	textScore.setString(to_string(score));
+	textScore.setCharacterSize(24);
+	textScore.setFillColor(sf::Color::Yellow);
+	textScore.setPosition(0, 500);
 }
 
-//void GameField::update(sf::Vector2i mouseCoordinates) {}
-
-void GameField::updatePlayerHp(int hp) {
-	textHp.setString(to_string(hp));
+void GameField::setTextScore(int score) {
+	textScore.setString(to_string(score));
 }
 
 void GameField::setTextHp(int hp) {
 	this->textHp.setString(to_string(hp));
 }
+
 
 void GameField::drawBackground(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(backSprite);
@@ -60,4 +66,5 @@ void GameField::drawBackground(sf::RenderTarget& target, sf::RenderStates states
 void GameField::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(grassSprite);
 	target.draw(textHp);
+	target.draw(textScore);
 }

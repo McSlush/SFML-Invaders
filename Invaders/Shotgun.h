@@ -15,7 +15,7 @@ public:
 	virtual ~Shotgun();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void update(sf::Vector2i mouseCoordinates);
+	virtual void update(int xPos);
 	virtual void initSprite(image_manager& imgMgr);
 };
 

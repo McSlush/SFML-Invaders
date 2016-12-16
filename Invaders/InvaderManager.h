@@ -5,24 +5,23 @@
 
 class InvaderManager {
 private:
-	Target* target;
-	vector<Target*> targets;
+	int cap;
+	int targetCounter;
+	Target** targets;
 	image_manager imgMgr;
-	vector<string>spriteNames;
 
 public:
 	InvaderManager();
-	InvaderManager(image_manager& imgMgr, std::vector<std::string>& spriteNames);
+	InvaderManager(image_manager& imgMgr);
 	~InvaderManager();
 
-	virtual void initSprite(image_manager& imgMgr, std::vector<std::string>& spriteNames);
+	int getTargetCounter();
+	Target* getInvader(int index);
+	void addInvader(Target* inv);
+	void removeInvader(int index);
+
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void update(float td);
+	virtual void update(float curTime);
 
-	//void addInvader() { targets.push_back(new Invader()); }
-	//void addInvader2() { targets.push_back(new Invader2(spriteNames)); }
-
-	vector<Target*> getInvaders() { return targets; }
-	void setInvaders(vector<Target*> invaders) { this->targets = invaders; }
 
 };

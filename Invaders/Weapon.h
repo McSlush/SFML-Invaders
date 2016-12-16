@@ -14,7 +14,7 @@ class Weapon : public sf::Drawable {
 protected:
 	float x, y;
 	int dmg;
-	float gameTime;
+	float curTime;
 	//Bullet bullet;
 
 public:
@@ -22,13 +22,13 @@ public:
 	virtual ~Weapon();
 
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
-	virtual void update(sf::Vector2i mouseCoordinates) = 0;
+	virtual void update(int xPos) = 0;
 
 	void setDmg(int dmg) { this->dmg = dmg; }
 	int getDmg() const { return this->dmg; }
 
-	void setGameTime(float td) { gameTime = td; }
-	float getGameTime() const { return gameTime; }
+	void setGameTime(float curTime) { this->curTime = curTime; }
+	float getGameTime() const { return curTime; }
 
 	void setX(float x) { this->x = x; }
 	float getX() const { return x; }

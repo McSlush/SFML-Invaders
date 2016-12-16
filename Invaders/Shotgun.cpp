@@ -5,7 +5,7 @@ Shotgun::Shotgun()
 }
 
 Shotgun::Shotgun(image_manager& imgMgr) {
-	this->dmg = 15;
+	this->dmg = 7;
 	this->y = 485;
 	initSprite(imgMgr);
 }
@@ -18,14 +18,14 @@ void Shotgun::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(shotgunSprite);
 }
 
-void Shotgun::update(sf::Vector2i mouseCoordinates) {
-	this->x = mouseCoordinates.x - shotgunSprite.getGlobalBounds().width / 2;
+void Shotgun::update(int xPos) {
+	this->x = xPos - shotgunSprite.getGlobalBounds().width / 2;
 	shotgunSprite.setPosition(x, y);
 }
 
 void Shotgun::initSprite(image_manager& imgMgr) {
 	if (!shotgunTexture.loadFromImage(imgMgr.get_image("../img/weapons.png"))) {
-		cout << "Failed to load Shutgun image";
+		cout << "Failed to load Shotgun image";
 	}
 
 	shotgunTexture.setSmooth(true);

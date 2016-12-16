@@ -1,10 +1,9 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <memory>
-#include <vector>
 #include "image_manager.h"
 #include "Bullet.h"
+#include "Car.h"
 
 using namespace std;
 
@@ -13,7 +12,7 @@ class Target : public sf::Drawable {
 protected:
 	float xSpeed, ySpeed;
 	int x, y, health, dmg;
-	float gameTime;
+	float curTime;
 	float bottom, top, left, right;
 
 	sf::Texture invaderTexture;
@@ -26,11 +25,12 @@ public:
 
 	virtual void initSprite() = 0;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const = 0;
-	virtual void update(float td) = 0;
+	virtual void update(float curTime) = 0;
 	virtual sf::FloatRect getGlobalBounds() const = 0;
 
 	virtual void collisionDetection() = 0;
-	virtual bool collision(shared_ptr<Bullet> b) const = 0;
+	virtual bool collisionBullet(Bullet* b) const = 0;
+	virtual bool collisionCar(Car* c) const = 0;
 
 
 
@@ -52,8 +52,8 @@ public:
 	void setYSpeed(float ySpeed) { this->ySpeed = ySpeed; };
 	float getYSpeed() const { return ySpeed; };
 
-	void setGameTime(float td) { gameTime = td; }
-	float getGameTime() const { return gameTime; }
+	void setGameTime(float curTime) { this->curTime = curTime; }
+	float getGameTime() const { return curTime; }
 
 	void setX(int x) { this->x = x; }
 	int getX() const { return x; }

@@ -9,14 +9,14 @@ Gun::Gun(image_manager& imgMgr)
 	initSprite(imgMgr);
 }
 
-Gun::~Gun() { }
+Gun::~Gun() {}
 
 void Gun::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(gunSprite);
 }
 
-void Gun::update(sf::Vector2i mouseCoordinates) {
-	this->x =  mouseCoordinates.x - gunSprite.getGlobalBounds().width / 2;
+void Gun::update(int xPos) {
+	this->x = xPos - gunSprite.getGlobalBounds().width / 2;
 	gunSprite.setPosition(x, y);
 }
 

@@ -2,21 +2,20 @@
 
 Bullet::Bullet() {};
 
-Bullet::Bullet(image_manager& imgMgr, sf::Vector2f mouseCooridinates) {
+Bullet::Bullet(image_manager& imgMgr, float xPos) {
 	this->imgMgr = imgMgr;
 	this->dmg = 10;
 	this->y = 525;
 	this->ySpeed = -6;
-	initSprite(mouseCooridinates);
+	initSprite(xPos);
 }
 
-void Bullet::update(float td) {
-	gameTime = td;
+
+void Bullet::update(float curTime) {
+	this->curTime = curTime;
 	bulletSprite.move(0, ySpeed);
 	collisionDetection();
 }
-
-
 
 void Bullet::collisionDetection() {
 	bottom = bulletSprite.getPosition().y + bulletSprite.getGlobalBounds().width;
@@ -25,7 +24,7 @@ void Bullet::collisionDetection() {
 	top = bulletSprite.getPosition().y;
 }
 
-void Bullet::initSprite(sf::Vector2f mouseCooridinates) {
+void Bullet::initSprite(float xPos) {
 	if (!bulletTexture.loadFromImage(this->imgMgr.get_image("../img/bullet.png"))) {
 		cout << "Failed to load Bullet img.";
 	}
@@ -34,7 +33,7 @@ void Bullet::initSprite(sf::Vector2f mouseCooridinates) {
 	bulletSprite.setTexture(bulletTexture);
 	bulletSprite.setTextureRect(sf::IntRect(0, 0, spriteFrameSize.x, spriteFrameSize.y));
 	bulletSprite.setScale(0.15f, 0.15f);
-	bulletSprite.setPosition(mouseCooridinates.x, y);
+	bulletSprite.setPosition(xPos, y);
 }
 
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {

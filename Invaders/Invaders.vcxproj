@@ -154,6 +154,7 @@
   <ItemGroup>
     <ClCompile Include="Aim.cpp" />
     <ClCompile Include="Bullet.cpp" />
+    <ClCompile Include="BulletManager.cpp" />
     <ClCompile Include="Car.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameField.cpp" />
@@ -167,10 +168,12 @@
     <ClCompile Include="Shotgun.cpp" />
     <ClCompile Include="Target.cpp" />
     <ClCompile Include="Weapon.cpp" />
+    <ClCompile Include="WeaponManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Aim.h" />
     <ClInclude Include="Bullet.h" />
+    <ClInclude Include="BulletManager.h" />
     <ClInclude Include="Car.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameField.h" />
@@ -183,9 +186,9 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="Shotgun.h" />
-    <ClInclude Include="SpriteNames.h" />
     <ClInclude Include="Target.h" />
     <ClInclude Include="Weapon.h" />
+    <ClInclude Include="WeaponManager.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Invaders.rc" />

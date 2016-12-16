@@ -10,7 +10,7 @@ class Bullet :public sf::Drawable {
 private:
 	int dmg;
 	float y, ySpeed;
-	float gameTime;
+	float curTime;
 
 	sf::Texture bulletTexture;
 	sf::Sprite bulletSprite;
@@ -19,17 +19,18 @@ private:
 public:
 	float bottom, top, left, right;
 
-	void collisionDetection();
 
 	Bullet();
 
-	Bullet(image_manager& imgMgr, sf::Vector2f mouseCooridinates);
+	Bullet(image_manager& imgMgr, float xPos);
 	~Bullet() {}
 
-	virtual void update(float td);
+	virtual void update(float curTime);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void initSprite(sf::Vector2f mouseCooridinates);
+	virtual void initSprite(float xPos);
 	sf::FloatRect getGlobalBounds() const { return bulletSprite.getGlobalBounds(); }
+
+	void collisionDetection();
 
 	void setBulletSprite(sf::Sprite bulletSprite) { this->bulletSprite = bulletSprite; }
 	sf::Sprite getBulletSprite() const { return bulletSprite; }

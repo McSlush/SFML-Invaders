@@ -6,47 +6,64 @@ Game::Game() {
 	srand((unsigned int)time(NULL));
 	sf::Vector2i mouseCoordinates;
 
-	for (size_t i = 0; i < names.size(); i++)
-	{
-		imgMgr.get_image(names.at(i));
-	}
-	names = spriteNames.getSpriteNames();
+	player = new Player(imgMgr);
 
-	player = make_unique<Player>(imgMgr, mouseCoordinates);
-
-	//TODO set up the background and such
 	int playerHp = player->getHealt();
-	gameField = make_unique<GameField>(imgMgr, playerHp);
+	gameField = new GameField(imgMgr, playerHp);
 
+	invMgr = new InvaderManager(imgMgr);
+
+	bulMgr = new BulletManager(imgMgr);
 }
 
-Game::~Game() {}
+Game::~Game() {
+	delete gameField;
+	delete player;
+	delete invMgr;
+	delete bulMgr;
+}
 
 void Game::changeWeapon(int weaponChoice) {
-	//player->changeWeapon(weaponChoice);
+	player->changeWeapon(weaponChoice);
 }
 
 void Game::collisionDetection() {
-	//invaders.push_back(move(make_unique<Invader>(imgMgr)));
-	bool removeBullet = false;
-	//bullets
-	for (size_t k = 0; k < bullets.size(); k++) {
+	Target* inv = nullptr;
+	Bullet* b = nullptr;
+	Car* c = nullptr;
+	
+	//check all bullets
+	for (int k = 0; k < player->getBulletCounter(); k++) {
 
-		for (size_t i = 0; i < invaders.size(); i++)
+		b = player->getBullet(k);
+		//check each invader
+		for (int i = 0; i < invMgr->getTargetCounter(); i++)
 		{			
-			shared_ptr<Bullet> b(bullets.at(k));
+			if (dynamic_cast<Invader*>(invMgr->getInvader(i))) {
+				inv = (Invader*)invMgr->getInvader(i);
+			}
+			else if (dynamic_cast<Invader2*>(invMgr->getInvader(i))) {
+				inv = (Invader2*)invMgr->getInvader(i);
+			}
 
 			//if invader gets hit by bullet
-			if (invaders.at(i)->collision(b)) {
-				//TODO set dmg from gun
-				cout << "hit";
-				invaders.at(i)->hit(10);
-				removeBullet = true;
+			if (inv->collisionBullet(b)) {
+				inv->hit(player->getDamage());
+				player->removeBullet(k);
 			}
 		}
-		if (removeBullet) {
+	}
 
-			bullets.erase(bullets.begin() + k);
+	//If enemy hits car/sonic
+	for (int i = 0; i < invMgr->getTargetCounter(); i++) {
+		inv = invMgr->getInvader(i);
+		Car* car = player->getCar();
+		if (inv->collisionCar(car)) {
+			//loose points equal to half invaders dmg
+			int score = player->adjustScore(inv->getDmg() / 2);
+			inv->hit(car->getDmg());
+			gameField->setTextScore(score);
+			invMgr->removeInvader(i);
 		}
 	}
 }
@@ -55,96 +72,91 @@ void Game::moveCar(int direction) {
 	player->moveCar(direction);
 }
 
-void Game::update(float td, sf::Vector2i mouseCooridinates) {
-	gameTime += td;
+void Game::update(float curTime, sf::Vector2i mouseCoordinates) {
+	this->curTime = curTime;
 
 	//DEBUG autoshoot
 	//shoot((sf::Vector2f)mouseCooridinates);
 
 	collisionDetection();
-	player->update(td, mouseCooridinates);
-	updateBullets(td);
-	updateInvaders(td);
+	player->update(curTime, mouseCoordinates);
+	updateInvaders();
 }
 
-
-void Game::updateBullets(float td) {
-	for (size_t i = 0; i < bullets.size(); i++) {
-		bullets.at(i)->update(td);
-	}
-	//remove the bullet when it's of screen
-	for (size_t i = 0; i < bullets.size(); i++) {
-		sf::Vector2f bulletPos = bullets.at(i)->getBulletSprite().getPosition();
-		if (bulletPos.y < -20) {
-			bullets.erase(bullets.begin() + i);
-		}
-	}
-}
-
-void Game::updateInvaders(float td) {
+void Game::updateInvaders() {
 	sf::FloatRect invBoundingBox;
+	Target* inv = nullptr;
+	this->totTime += curTime;
+	int spawnTime = totTime;
+	//cout << curTime << endl;
+
+	if (spawnTime == 1 && totTime > 0.00002) {
+		invMgr->addInvader(new Invader(imgMgr));
+	}
+	if (totTime > 1.0001) {
+		//invMgr->addInvader(new Invader2(imgMgr));
+		totTime = 0;
+	}
+
 
 	//prepere to spawn
 	int spawnRate = rand() % 100 + 1;
-	if (remainder(gameTime, 3) > 1) {
+	if (remainder(curTime, 3) < 2) {
 		//random spawn
-		if (spawnRate > 1 && spawnRate < 10) {
-			invaders.push_back(move(make_unique<Invader>(imgMgr)));
+		if (spawnRate > 1 && spawnRate < 3) {
+			//invMgr->addInvader(new Invader(imgMgr));
 		}
-		if (spawnRate > 11 && spawnRate < 21) {
-			//invMgr->addInvader2();
+		if (spawnRate > 11 && spawnRate < 13) {
+			//invMgr->addInvader(new Invader2(imgMgr));
 		}
 	}
 
+
 	//kill enemy if...
-	for (size_t i = 0; i < invaders.size(); i++)
+	for (int i = 0; i < invMgr->getTargetCounter(); i++)
 	{
-		invBoundingBox = invaders.at(i)->getGlobalBounds();
+		if (dynamic_cast<Invader*>(invMgr->getInvader(i))) {
+			inv = (Invader*)invMgr->getInvader(i);
+		}
+		else if (dynamic_cast<Invader2*>(invMgr->getInvader(i))) {
+			inv = (Invader2*)invMgr->getInvader(i);
+		}
+
+		invBoundingBox = inv->getGlobalBounds();
 		//kill invader if 0 hp
-		if (invaders.at(i)->getHealth() <= 0) {
-			invaders.erase(invaders.begin() + i);
+		if (inv->getHealth() <= 0) {
+			int score = player->adjustScore(inv->getDmg());
+			gameField->setTextScore(score);
+			invMgr->removeInvader(i);
 		}
 
 		//kill enemies that hits the ground
 		else if (invBoundingBox.intersects(gameField->getGlobalBounds())) {
 			//do damage to user.
-			int hp = player->adjustHealth(- invaders.at(i)->getDmg());
+			int hp = player->adjustHealth(-inv->getDmg());
 			gameField->setTextHp(hp);
+			int score = player->adjustScore(-inv->getDmg());
+			gameField->setTextScore(score);
 			//kill invader on ground hit
-			invaders.erase(invaders.begin() + i);
+			invMgr->removeInvader(i);
 		}
 	}
 	
-	//for (size_t i = 0; i < invaders.size(); i++) {
-	for(shared_ptr<Invader> invader : invaders) {
-		invader->update(td);
-	}
+	invMgr->update(curTime);
 }
 
 void Game::shoot(sf::Vector2f mouseCoordinates) {
-	//only 10 bullets on screen at a time
-	//TODO change size on weapon. Move to weapon?
-	if (bullets.size() < 10) {
-		bullets.push_back(make_unique<Bullet>(imgMgr, mouseCoordinates));
-	}
+	player->shoot(mouseCoordinates);
 }
 
 void Game::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 	gameField->drawBackground(target, states);
 	
-	for (size_t i = 0; i < invaders.size(); i++) {
-		invaders.at(i)->draw(target, states);
-	}
+	invMgr->draw(target, states);
 
 	gameField->draw(target, states);
 
 	player->drawCar(target, states);
 	
-	for (size_t i = 0; i < bullets.size(); i++) {
-		bullets.at(i)->draw(target, states);
-	}
-
 	player->draw(target, states);
-	
-	
 }

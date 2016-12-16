@@ -8,22 +8,44 @@ Car::Car() {}
 
 Car::Car(image_manager& imgMgr) {
 	this->y = 400;
-	this->x = 50;
-	this->xSpeed = 1000;
+	this->x = 10;
+	this->xSpeed = 300;
+	this->dmg = 50;
 	this->imgMgr = imgMgr;
-	initSprite(imgMgr);
+	initSprite();
 }
 
 Car::~Car() {
 
 }
 
-void Car::moveCar(int direction) {
-	carSprite.move(xSpeed, 0);
+void Car::moveCar(float curTime, int direction) {
+	//Move to the right
+	if (direction == 1 && this->x < 520) {
+		this->x += xSpeed * curTime;
+	}
+	//Move to the left
+	else if (direction == 2 && this->x > 0) {
+		this->x -= xSpeed * curTime;
+	}
 }
 
+int Car::getDmg() {
+	return this->dmg;
+}
 
-void Car::initSprite(image_manager& imgMgr) {
+void Car::collisionDetection() {
+	bottom = carSprite.getPosition().y + carSprite.getGlobalBounds().width;
+	left = carSprite.getPosition().x;
+	right = carSprite.getPosition().x + carSprite.getGlobalBounds().width;
+	top = carSprite.getPosition().y;
+}
+
+sf::FloatRect Car::getGlobalBounds() const {
+	return carSprite.getGlobalBounds(); 
+}
+
+void Car::initSprite() {
 	if (!carTexture.loadFromImage(imgMgr.get_image("../img/sonic.png"))) {
 		cout << "Failed to load Car image";
 	}
@@ -35,17 +57,9 @@ void Car::initSprite(image_manager& imgMgr) {
 	carSprite.setPosition(0, -250);
 }
 
-//TODO fix collision
-void collisionDetection() {
-
-}
-
-bool collision(Bullet& bullet) {
-	return true;
-}
-
-void Car::update() {
+void Car::update(float curTime) {
 	carSprite.setPosition(x, y);
+	collisionDetection();
 }
 
 void Car::draw(sf::RenderTarget& target, sf::RenderStates states) const {

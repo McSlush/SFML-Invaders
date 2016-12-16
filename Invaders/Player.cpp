@@ -3,28 +3,28 @@
 //TODO: gun, bullet ... here
 
 
-Player::Player(image_manager& imgMgr, sf::Vector2i mouseCoordinates) {
+Player::Player(image_manager& imgMgr) {
 	this->imgMgr = imgMgr;
 	this->health = 10;
-	aim = make_unique<Aim>(imgMgr);
+	this->score = 0;
+	this->aim = make_unique<Aim>(imgMgr);
 	this->car = new Car(imgMgr);
-	weapon = make_unique<Gun>(imgMgr);
+	this->weapon = new Gun(imgMgr);
+	this->bulMgr = new BulletManager(imgMgr);
 }
 
 Player::~Player() {
 	delete car;
+	delete weapon;
+	delete bulMgr;
+}
+
+Car* Player::getCar() {
+	return this->car;
 }
 
 void Player::moveCar(int direction) {
-	//TODO make carclass handle this
-	//Move to the right
-	if (direction == 1 && car->x < 520) {
-		car->x += 3;
-	}
-	//Move to the left
-	else if (direction == 2 && car->x > 0) {
-		car->x -= 3;
-	}
+	car->moveCar(curTime, direction);
 }
 
 void Player::changeWeapon(int weaponChoice)
@@ -32,26 +32,62 @@ void Player::changeWeapon(int weaponChoice)
 	switch (weaponChoice)
 	{
 	case 1:
-		weapon = make_unique<Gun>(imgMgr);
+		delete weapon;
+		this->weapon = new Gun(imgMgr);
 		break;
 	case 2:
-		weapon = make_unique<Shotgun>(imgMgr);
+		delete weapon;
+		this->weapon = new Shotgun(imgMgr);
 		break;
 	default:
 		break;
 	}
 }
 
-void Player::update(float td, sf::Vector2i mouseCoordinates) {
-	//gameTime = td;
-	aim->update(mouseCoordinates);
-	car->update();
-	weapon->update(mouseCoordinates);
+int Player::getDamage() {
+	return this->weapon->getDmg();
+}
+
+void Player::shoot(sf::Vector2f mouseCoordinates) {
+	if (this->weapon == dynamic_cast<Gun*>(this->weapon)) {
+		if (bulMgr->getBulletCounter() < 7) {
+			bulMgr->addBullet(new Bullet(imgMgr, mouseCoordinates.x));
+		}
+	}
+	else if (this->weapon == dynamic_cast<Shotgun*>(this->weapon)) {
+		if (bulMgr->getBulletCounter() < 8) {
+			bulMgr->addBullet(new Bullet(imgMgr, mouseCoordinates.x + 10));
+			bulMgr->addBullet(new Bullet(imgMgr, mouseCoordinates.x + 0));
+			bulMgr->addBullet(new Bullet(imgMgr, mouseCoordinates.x - 15));
+			bulMgr->addBullet(new Bullet(imgMgr, mouseCoordinates.x - 30));
+		}
+	}
 }
 
 int Player::adjustHealth(int adjustHp) { 
-	this->health += adjustHp; 
+	health += adjustHp; 
 	return health;
+}
+
+int Player::adjustScore(int adjustScore) {
+	score += adjustScore;
+	return score;
+}
+
+void Player::removeBullet(int index) {
+	bulMgr->removeBullet(index);
+}
+
+Bullet* Player::getBullet(int index) {
+	return bulMgr->getBullet(index);
+}
+
+void Player::update(float curTime, sf::Vector2i mouseCoordinates) {
+	this->curTime = curTime;
+	aim->update(mouseCoordinates);
+	car->update(this->curTime);
+	weapon->update(mouseCoordinates.x);
+	bulMgr->update(this->curTime, bulMgr);
 }
 
 void Player::drawCar(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -59,9 +95,8 @@ void Player::drawCar(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void Player::draw(sf::RenderTarget& target, sf::RenderStates states) const {
-	//TODO: draw  gun, health, bullet ... here
-	//car->draw(target, states);
 	aim->draw(target, states);
+	bulMgr->draw(target, states);
 	weapon->draw(target, states);
 }
 

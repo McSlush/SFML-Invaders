@@ -3,23 +3,22 @@
 Invader::Invader() {
 	this->health = 10;
 	this->dmg = 5;
-	this->xSpeed = 7;
-	this->imgMgr = imgMgr;
+	this->ySpeed = 300;
 }
 
 Invader::Invader(image_manager& imgMgr) {
 	this->imgMgr = imgMgr;
 	this->health = 10;
 	this->dmg = 5;
-	this->ySpeed = 7;
+	this->ySpeed = 200;
 	initSprite();
 }
 
 Invader::~Invader() {}
 
-void Invader::update(float td) {
-	gameTime = td;
-	invaderSprite.move(0, ySpeed);
+void Invader::update(float curTime) {
+	this->curTime = curTime;
+	invaderSprite.move(0, ySpeed * curTime);
 	collisionDetection();
 }
 
@@ -30,13 +29,23 @@ void Invader::collisionDetection() {
 	top = invaderSprite.getPosition().y;
 }
 
-bool Invader::collision(shared_ptr<Bullet> b) const {
+bool Invader::collisionBullet(Bullet* b) const {
+	//check when and how bullets are removed on collision
 	if (right < b->left || left > b->right ||
 		top > b->bottom || bottom < b->top) {
 		return false;
 	}
 	//hit!
 	return true;
+}
+
+bool Invader::collisionCar(Car* c) const {
+		if (right < c->left || left > c->right ||
+			top > c->bottom || bottom < c->top) {
+			return false;
+		}
+		//hit!
+		return true;
 }
 
 void Invader::initSprite() {

@@ -23,12 +23,21 @@ int main()
 	window.setMouseCursorVisible(false);
 
 	sf::Vector2i mouseCooridinates;
-	sf::Clock dt;
+	sf::Clock clock;
+	sf::Event event;
+
+	float lastTime = 0;
+	float curTime = 0;
+	float fps = 0;
+
 	Game game;
 	
 	while (window.isOpen())
 	{
-		sf::Event event;
+		curTime = clock.restart().asSeconds();
+		lastTime = curTime;
+		fps = 1 / curTime;
+				
 		mouseCooridinates = sf::Mouse::getPosition(window);
 		while (window.pollEvent(event))
 		{
@@ -58,7 +67,7 @@ int main()
 			 game.moveCar(2);
 		 }
 
-		game.update(dt.restart().asSeconds(), mouseCooridinates);
+		game.update(curTime, mouseCooridinates);
 		
 		window.clear();
 		window.draw(game);
