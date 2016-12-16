@@ -11,9 +11,10 @@ class Target : public sf::Drawable {
 	
 protected:
 	float xSpeed, ySpeed;
-	int x, y, health, dmg;
+	float xPos, yPos;
 	float curTime;
 	float bottom, top, left, right;
+	int health, dmg;
 
 	sf::Texture invaderTexture;
 	sf::Sprite invaderSprite;
@@ -32,7 +33,7 @@ public:
 	virtual bool collisionBullet(Bullet* b) const = 0;
 	virtual bool collisionCar(Car* c) const = 0;
 
-
+	virtual void moveTarget() = 0;
 
 	void setInviderSprite(sf::Sprite invaderSprite) { this->invaderSprite = invaderSprite; }
 	sf::Sprite getInvaderSprite() const { return invaderSprite; }
@@ -55,9 +56,9 @@ public:
 	void setGameTime(float curTime) { this->curTime = curTime; }
 	float getGameTime() const { return curTime; }
 
-	void setX(int x) { this->x = x; }
-	int getX() const { return x; }
+	void setX(float xPos) { this->xPos = xPos; }
+	float getX() const { return xPos; }
 
-	void setY(int y) { this->y = y; }
-	int getY() const { return y; }
+	void setY(float yPos) { this->yPos = yPos; }
+	float getY() const { return yPos; }
 };

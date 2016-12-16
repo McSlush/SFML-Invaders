@@ -87,30 +87,16 @@ void Game::updateInvaders() {
 	sf::FloatRect invBoundingBox;
 	Target* inv = nullptr;
 	this->totTime += curTime;
-	int spawnTime = totTime;
-	//cout << curTime << endl;
+	float spawnTime = totTime;
 
-	if (spawnTime == 1 && totTime > 0.00002) {
+	//TODO improve spawn rate
+	if (totTime > 1.00001) {
 		invMgr->addInvader(new Invader(imgMgr));
 	}
 	if (totTime > 1.0001) {
-		//invMgr->addInvader(new Invader2(imgMgr));
+		invMgr->addInvader(new Invader2(imgMgr));
 		totTime = 0;
 	}
-
-
-	//prepere to spawn
-	int spawnRate = rand() % 100 + 1;
-	if (remainder(curTime, 3) < 2) {
-		//random spawn
-		if (spawnRate > 1 && spawnRate < 3) {
-			//invMgr->addInvader(new Invader(imgMgr));
-		}
-		if (spawnRate > 11 && spawnRate < 13) {
-			//invMgr->addInvader(new Invader2(imgMgr));
-		}
-	}
-
 
 	//kill enemy if...
 	for (int i = 0; i < invMgr->getTargetCounter(); i++)

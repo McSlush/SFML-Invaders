@@ -5,7 +5,8 @@ Invader2::Invader2() {
 	this->health = 20;
 	this->dmg = 7;
 	this->ySpeed = 150;
-	this->xSpeed = 75;
+	this->xSpeed = 200;
+	this->totTime = 0;
 }
 
 Invader2::Invader2(image_manager& imgMgr) {
@@ -13,16 +14,21 @@ Invader2::Invader2(image_manager& imgMgr) {
 	this->health = 20;
 	this->dmg = 7;
 	this->ySpeed = 150;
-	this->xSpeed = 75;
+	this->xSpeed = 200;
+	this->totTime = 0;
 	initSprite();
 }
 
 Invader2::~Invader2() { }
 
 void Invader2::update(float curTime) {
+	//this->xSpeed = rand() % 500 + (-250);
 	this->curTime = curTime;
-	this->xSpeed = rand() % 160 + (-80);
-	invaderSprite.move(xSpeed * curTime, ySpeed * curTime);
+	//invaderSprite.move(xSpeed * curTime, ySpeed * curTime);
+	//moveTarget(curTime);
+	//this->xPos = xSpeed * curTime;
+	//this->yPos = ySpeed * curTime;
+	moveTarget();
 	collisionDetection();
 }
 
@@ -44,12 +50,24 @@ bool Invader2::collisionBullet(Bullet* b) const {
 }
 
 bool Invader2::collisionCar(Car* c) const {
-		if (right < c->left || left > c->right ||
-			top > c->bottom || bottom < c->top) {
-			return false;
-		}
-		//hit!
-		return true;
+	if (right < c->left || left > c->right ||
+		top > c->bottom || bottom < c->top) {
+		return false;
+	}
+	//hit!
+	return true;
+}
+
+void Invader2::moveTarget() {
+	totTime += curTime;
+	//move right for 1 sec
+	if (totTime < 1)
+		invaderSprite.move(xSpeed * this->curTime, ySpeed * curTime);
+	//move left for once sec
+	else if (totTime < 2)
+		invaderSprite.move(-xSpeed * this->curTime, ySpeed * curTime);
+	else
+		totTime = 0;
 }
 
 void Invader2::draw(sf::RenderTarget& target, sf::RenderStates states) const {
@@ -57,7 +75,6 @@ void Invader2::draw(sf::RenderTarget& target, sf::RenderStates states) const {
 }
 
 void Invader2::initSprite() {
-	//TODO if all spriteName, load each invaders.png
 	int rands = rand() % 400 + 1;
 	if (!invaderTexture.loadFromImage(imgMgr.get_image("../img/invaders.png"))) {
 		cout << "Failed to load Invader2 image";

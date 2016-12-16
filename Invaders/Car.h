@@ -13,7 +13,7 @@ private:
 
 public:
 	int dmg;
-	int y, x;
+	float yPos, xPos;
 	float bottom, top, left, right;
 
 	Car();

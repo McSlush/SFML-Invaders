@@ -13,6 +13,8 @@ public:
 	virtual void update(float curTime);
 	virtual sf::FloatRect getGlobalBounds() const { return invaderSprite.getGlobalBounds(); }
 
+	void Invader::moveTarget();
+
 	virtual void collisionDetection();
 	virtual bool collisionBullet(Bullet* b) const;
 	virtual bool collisionCar(Car* c) const;

@@ -7,8 +7,8 @@ using namespace std;
 Car::Car() {}
 
 Car::Car(image_manager& imgMgr) {
-	this->y = 400;
-	this->x = 10;
+	this->yPos = 400;
+	this->xPos = 10;
 	this->xSpeed = 300;
 	this->dmg = 50;
 	this->imgMgr = imgMgr;
@@ -21,12 +21,12 @@ Car::~Car() {
 
 void Car::moveCar(float curTime, int direction) {
 	//Move to the right
-	if (direction == 1 && this->x < 520) {
-		this->x += xSpeed * curTime;
+	if (direction == 1 && this->xPos < 520) {
+		this->xPos += xSpeed * curTime;
 	}
 	//Move to the left
-	else if (direction == 2 && this->x > 0) {
-		this->x -= xSpeed * curTime;
+	else if (direction == 2 && this->xPos > 0) {
+		this->xPos -= xSpeed * curTime;
 	}
 }
 
@@ -58,7 +58,7 @@ void Car::initSprite() {
 }
 
 void Car::update(float curTime) {
-	carSprite.setPosition(x, y);
+	carSprite.setPosition(xPos, yPos);
 	collisionDetection();
 }
 

@@ -16,6 +16,9 @@ Invader::Invader(image_manager& imgMgr) {
 
 Invader::~Invader() {}
 
+void Invader::moveTarget() {
+}
+
 void Invader::update(float curTime) {
 	this->curTime = curTime;
 	invaderSprite.move(0, ySpeed * curTime);
