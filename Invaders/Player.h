@@ -15,11 +15,13 @@ private:
 	int health;
 	int score;
 	float curTime;
+	bool doGun;
 	image_manager imgMgr;
+	Gun* gun;
+	Shotgun* shotgun;
 	Car* car;
-	unique_ptr<Aim> aim;
-	Weapon* weapon;
 	BulletManager* bulMgr;
+	unique_ptr<Aim> aim;
 
 public:
 	Player() {}
@@ -40,9 +42,7 @@ public:
 	
 	void removeBullet(int index);
 	Bullet* getBullet(int index);
-	int getBulletCounter() {
-		return this->bulMgr->getBulletCounter();
-	}
+	int getBulletCounter();
 
 	int getHealt() { return health; }
 	void setHealth(int health) { this->health = health; }

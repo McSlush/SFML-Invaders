@@ -4,6 +4,7 @@
 class Invader2 : public Target {
 //TODO move this?
 private:
+	bool leftBound, rightBound;
 	float totTime;
 
 public:

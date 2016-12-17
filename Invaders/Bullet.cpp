@@ -2,14 +2,25 @@
 
 Bullet::Bullet() {};
 
-Bullet::Bullet(image_manager& imgMgr, float xPos) {
+Bullet::Bullet(image_manager& imgMgr, float xPos, BulletType bulletType) {
 	this->imgMgr = imgMgr;
 	this->dmg = 10;
-	this->y = 525;
-	this->ySpeed = -6;
+	this->yPos = 525;
+	this->ySpeed = -8;
+	this->bulletType = bulletType;
 	initSprite(xPos);
 }
 
+Bullet::Bullet(const Bullet& orig){
+	this->dmg = orig.dmg;
+	this->yPos = orig.yPos;
+	this->ySpeed = orig.ySpeed;
+	this->curTime = orig.curTime;
+	this->bulletSprite = orig.bulletSprite;
+	this->bulletTexture = orig.bulletTexture;
+	this->imgMgr = orig.imgMgr;
+	this->bulletType = orig.bulletType;
+}
 
 void Bullet::update(float curTime) {
 	this->curTime = curTime;
@@ -33,7 +44,7 @@ void Bullet::initSprite(float xPos) {
 	bulletSprite.setTexture(bulletTexture);
 	bulletSprite.setTextureRect(sf::IntRect(0, 0, spriteFrameSize.x, spriteFrameSize.y));
 	bulletSprite.setScale(0.15f, 0.15f);
-	bulletSprite.setPosition(xPos, y);
+	bulletSprite.setPosition(xPos, yPos);
 }
 
 void Bullet::draw(sf::RenderTarget& target, sf::RenderStates states) const {

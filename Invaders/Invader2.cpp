@@ -16,18 +16,15 @@ Invader2::Invader2(image_manager& imgMgr) {
 	this->ySpeed = 150;
 	this->xSpeed = 200;
 	this->totTime = 0;
+	this->leftBound = false;
+	this->rightBound = false;
 	initSprite();
 }
 
 Invader2::~Invader2() { }
 
 void Invader2::update(float curTime) {
-	//this->xSpeed = rand() % 500 + (-250);
 	this->curTime = curTime;
-	//invaderSprite.move(xSpeed * curTime, ySpeed * curTime);
-	//moveTarget(curTime);
-	//this->xPos = xSpeed * curTime;
-	//this->yPos = ySpeed * curTime;
 	moveTarget();
 	collisionDetection();
 }
@@ -60,14 +57,47 @@ bool Invader2::collisionCar(Car* c) const {
 
 void Invader2::moveTarget() {
 	totTime += curTime;
-	//move right for 1 sec
-	if (totTime < 1)
-		invaderSprite.move(xSpeed * this->curTime, ySpeed * curTime);
-	//move left for once sec
-	else if (totTime < 2)
+	//TODO check the value up. get it from main somehow... base on window size
+	float xBoundLeft = 20;
+	float xBoundRight = 520;
+	float spriteX = invaderSprite.getPosition().x;
+	float spriteY = invaderSprite.getPosition().y;
+
+	//if target is to far left of the screen
+	if (spriteX < xBoundLeft) {
+		leftBound = true;
+	}
+	//if target is to far left of the screen
+	else if (spriteX > xBoundRight) {
+		rightBound = true;
+	}
+
+	////if target is to far to one side of the screen
+	if (rightBound) {
 		invaderSprite.move(-xSpeed * this->curTime, ySpeed * curTime);
-	else
-		totTime = 0;
+		//Make the target move the other way, once it manages to jump out of x == 460
+		if (spriteX < 460) {
+			rightBound = false;
+		}
+	}
+	else if (leftBound) {
+		invaderSprite.move(xSpeed * this->curTime, ySpeed * curTime);
+		//Make the target move the other way, once it manages to jump out of x == 60
+		if (spriteX > 60) {
+			leftBound = false;
+		}
+	}
+
+	if (!rightBound && !leftBound) {
+		//move right 
+		if (totTime < 1)
+			invaderSprite.move(-xSpeed * this->curTime, ySpeed * curTime);
+		//move left 
+		else if (totTime < 2)
+			invaderSprite.move(xSpeed * this->curTime, ySpeed * curTime);
+		else
+			totTime = 0;
+	}
 }
 
 void Invader2::draw(sf::RenderTarget& target, sf::RenderStates states) const {

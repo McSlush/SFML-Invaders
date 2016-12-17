@@ -7,9 +7,10 @@
 using namespace std;
 
 class Bullet :public sf::Drawable {
+
 private:
 	int dmg;
-	float y, ySpeed;
+	float yPos, ySpeed;
 	float curTime;
 
 	sf::Texture bulletTexture;
@@ -17,12 +18,17 @@ private:
 	image_manager imgMgr;
 
 public:
-	float bottom, top, left, right;
+	enum BulletType {
+		GUN,
+		SHOTGUN
+	};
 
+	float bottom, top, left, right;
+	BulletType bulletType;
 
 	Bullet();
-
-	Bullet(image_manager& imgMgr, float xPos);
+	Bullet(const Bullet& orig);
+	Bullet(image_manager& imgMgr, float xPos, BulletType bulletType);
 	~Bullet() {}
 
 	virtual void update(float curTime);
