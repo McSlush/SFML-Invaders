@@ -16,7 +16,7 @@ private:
 public:
 	Aim();
 	Aim(image_manager& imgMgr);
-	void update(sf::Vector2i mouseCoordinates);
+	void update(sf::Vector2f mouseCoordinates);
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
 
 	sf::Sprite getAimSprite() const { return aimSprite; }

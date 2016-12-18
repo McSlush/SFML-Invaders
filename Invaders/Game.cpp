@@ -4,7 +4,7 @@ using namespace std;
 
 Game::Game() {
 	srand((unsigned int)time(NULL));
-	sf::Vector2i mouseCoordinates;
+	sf::Vector2f mouseCoordinates;
 
 	player = new Player(imgMgr);
 
@@ -72,7 +72,7 @@ void Game::moveCar(int direction) {
 	player->moveCar(direction);
 }
 
-void Game::update(float curTime, sf::Vector2i mouseCoordinates) {
+StateChange Game::update(float curTime, sf::Vector2f mouseCoordinates) {
 	this->curTime = curTime;
 
 	//DEBUG autoshoot
@@ -81,6 +81,25 @@ void Game::update(float curTime, sf::Vector2i mouseCoordinates) {
 	collisionDetection();
 	player->update(curTime, mouseCoordinates);
 	updateInvaders();
+
+	//Move the car
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
+		moveCar(1);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
+		moveCar(2);
+	}
+	//change weapon
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
+		changeWeapon(1);
+	}
+	else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
+		changeWeapon(2);
+	}
+	if (player->getHealt() <= 0) {
+		return StateChange::GAME_OVER; // It's game over man!
+	}
+	return StateChange::NO_CHANGE;
 }
 
 void Game::updateInvaders() {
@@ -130,7 +149,7 @@ void Game::updateInvaders() {
 	invMgr->update(curTime);
 }
 
-void Game::shoot(sf::Vector2f mouseCoordinates) {
+void Game::leftClick(sf::Vector2f mouseCoordinates) {
 	player->shoot(mouseCoordinates);
 }
 

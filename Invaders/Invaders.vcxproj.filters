@@ -16,9 +16,6 @@
     <Filter Include="Header Files\Image Files">
       <UniqueIdentifier>{ded884ca-d7f6-48fc-8cf0-99640e67f5bb}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Header Files\Player">
-      <UniqueIdentifier>{27f795bd-e0bc-4e6f-bff0-b4d91c07f274}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Header Files\Target Files">
       <UniqueIdentifier>{8f3d1a75-81a0-457a-84b6-888577e283ab}</UniqueIdentifier>
     </Filter>
@@ -31,11 +28,20 @@
     <Filter Include="Source Files\Target Files">
       <UniqueIdentifier>{b9d8b8d3-6f05-41c7-811f-fbba01a817da}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Player">
-      <UniqueIdentifier>{d1c30fa7-4d7a-43ad-b3c4-940895d76ea7}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\Weapon Files">
       <UniqueIdentifier>{68ca57b5-a7d0-41d8-98e3-16f0906a3e3f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\State Files">
+      <UniqueIdentifier>{787a121a-d76d-40cd-9a31-dbf930204463}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\State Files">
+      <UniqueIdentifier>{b2e5364c-f053-41a2-8f97-a45348bf982e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Player Files">
+      <UniqueIdentifier>{d1c30fa7-4d7a-43ad-b3c4-940895d76ea7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Player Files">
+      <UniqueIdentifier>{27f795bd-e0bc-4e6f-bff0-b4d91c07f274}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -49,10 +55,10 @@
       <Filter>Source Files\Image Files</Filter>
     </ClCompile>
     <ClCompile Include="Aim.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player Files</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player Files</Filter>
     </ClCompile>
     <ClCompile Include="InvaderManager.cpp">
       <Filter>Source Files\Target Files</Filter>
@@ -75,14 +81,11 @@
     <ClCompile Include="GameField.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Car.cpp">
-      <Filter>Source Files\Player</Filter>
+      <Filter>Source Files\Player Files</Filter>
     </ClCompile>
     <ClCompile Include="BulletManager.cpp">
       <Filter>Source Files\Weapon Files</Filter>
@@ -90,11 +93,17 @@
     <ClCompile Include="WeaponManager.cpp">
       <Filter>Source Files\Weapon Files</Filter>
     </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Source Files\State Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameOver.cpp">
+      <Filter>Source Files\State Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Source Files\State Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Game.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="Invader.h">
       <Filter>Header Files\Target Files</Filter>
     </ClInclude>
@@ -111,13 +120,13 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Aim.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player Files</Filter>
     </ClInclude>
     <ClInclude Include="GameField.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player Files</Filter>
     </ClInclude>
     <ClInclude Include="InvaderManager.h">
       <Filter>Header Files\Target Files</Filter>
@@ -138,13 +147,25 @@
       <Filter>Header Files\Target Files</Filter>
     </ClInclude>
     <ClInclude Include="Car.h">
-      <Filter>Header Files\Player</Filter>
+      <Filter>Header Files\Player Files</Filter>
     </ClInclude>
     <ClInclude Include="BulletManager.h">
       <Filter>Header Files\Weapon Files</Filter>
     </ClInclude>
     <ClInclude Include="WeaponManager.h">
       <Filter>Header Files\Weapon Files</Filter>
+    </ClInclude>
+    <ClInclude Include="State.h">
+      <Filter>Header Files\State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOver.h">
+      <Filter>Header Files\State Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\State Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -2,7 +2,7 @@
 
 Player::Player(image_manager& imgMgr) {
 	this->imgMgr = imgMgr;
-	this->health = 10;
+	this->health = 100;
 	this->score = 0;
 	this->aim = make_unique<Aim>(imgMgr);
 	this->car = new Car(imgMgr);
@@ -84,7 +84,7 @@ Bullet* Player::getBullet(int index) {
 		return bulMgr->getBullet(index);
 }
 
-void Player::update(float curTime, sf::Vector2i mouseCoordinates) {
+void Player::update(float curTime, sf::Vector2f mouseCoordinates) {
 	this->curTime = curTime;
 	aim->update(mouseCoordinates);
 	car->update(curTime);

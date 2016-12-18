@@ -1,3 +1,5 @@
-﻿  Shotgun.cpp
+﻿  Player.cpp
+d:\project\visual\invaders\invaders\player.cpp(93): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
+d:\project\visual\invaders\invaders\player.cpp(95): warning C4244: 'argument': conversion from 'float' to 'int', possible loss of data
   Invaders.vcxproj -> D:\project\visual\Invaders\Debug\Invaders.exe
   Invaders.vcxproj -> D:\project\visual\Invaders\Debug\Invaders.pdb (Full PDB)

@@ -1,10 +1,13 @@
  #include <SFML/Graphics.hpp>
 #include <iostream>
 #include "Game.h"
+#include "Menu.h"
+#include "GameOver.h"
 
 #define _CRTDBG_MAP_ALLOC 
 #include <stdlib.h>  
 #include <crtdbg.h> 
+
 
 /* Nice links
 Smart pointers
@@ -26,19 +29,22 @@ int main()
 	sf::Clock clock;
 	sf::Event event;
 
+	State* curState = new Menu();
+
 	float lastTime = 0;
 	float curTime = 0;
 	float fps = 0;
 
-	Game game;
+	//Game game;
 	
 	while (window.isOpen())
 	{
+		mouseCooridinates = sf::Mouse::getPosition(window);
+		StateChange status = curState->update(curTime, (sf::Vector2f)mouseCooridinates);
 		curTime = clock.restart().asSeconds();
 		lastTime = curTime;
 		fps = 1 / curTime;
-				
-		mouseCooridinates = sf::Mouse::getPosition(window);
+
 		while (window.pollEvent(event))
 		{
 			//Close window
@@ -49,31 +55,30 @@ int main()
 			//shoot if right click
 			else if (event.type == sf::Event::MouseButtonPressed) {
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					game.shoot((sf::Vector2f) mouseCooridinates);
+					curState->leftClick((sf::Vector2f) mouseCooridinates);
 				}
 			}
-			//change weapon
-			else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num1)) {
-				game.changeWeapon(1);
-			} else if (sf::Keyboard::isKeyPressed(sf::Keyboard::Num2)) {
-				game.changeWeapon(2);
-			}
 		}
-		//Move the car
-		 if (sf::Keyboard::isKeyPressed(sf::Keyboard::D)) {
-			 game.moveCar(1);
+		
+		 //Change game status from menu, game, game over.
+		 if (status == StateChange::MENU) {
+			 delete curState;
+			 curState = new Menu();
 		 }
-		 else if (sf::Keyboard::isKeyPressed(sf::Keyboard::A)) {
-			 game.moveCar(2);
+		 else if (status == StateChange::GAME) {
+			 delete curState;
+			 curState = new Game();
+		 }
+		 else if (status == StateChange::GAME_OVER) {
+			 delete curState;
+			 curState = new GameOver();
 		 }
 
-		game.update(curTime, mouseCooridinates);
-		
 		window.clear();
-		window.draw(game);
-		
+		window.draw(*curState);
 		window.display();
 	}
 
+	delete curState;
 	return 0;
 }

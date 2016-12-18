@@ -12,7 +12,7 @@ Aim::Aim(image_manager& imgMgr) {
 }
 
 
-void Aim::update(sf::Vector2i mouseCoordinates) {
+void Aim::update(sf::Vector2f mouseCoordinates) {
 	aimSprite.setPosition(mouseCoordinates.x, mouseCoordinates.y);
 }
 

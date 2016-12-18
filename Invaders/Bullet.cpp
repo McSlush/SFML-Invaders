@@ -6,6 +6,7 @@ Bullet::Bullet(image_manager& imgMgr, float xPos, BulletType bulletType) {
 	this->imgMgr = imgMgr;
 	this->dmg = 10;
 	this->yPos = 525;
+	//this->xPos = xPos;
 	this->ySpeed = -8;
 	this->bulletType = bulletType;
 	initSprite(xPos);

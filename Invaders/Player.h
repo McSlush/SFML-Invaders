@@ -30,7 +30,7 @@ public:
 
 	void Player::drawCar(sf::RenderTarget& target, sf::RenderStates states) const;
 	virtual void draw(sf::RenderTarget& target, sf::RenderStates states) const;
-	virtual void update(float curTime, sf::Vector2i mouseCooridinates);
+	virtual void update(float curTime, sf::Vector2f mouseCooridinates);
 	
 	Car* getCar();
 	int getDamage();

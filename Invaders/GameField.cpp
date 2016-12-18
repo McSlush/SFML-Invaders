@@ -12,7 +12,6 @@ GameField::GameField(image_manager& imgMgr, int playerHp) {
 	loadFont();
 }
 
-
 void GameField::initSprite() {
 	if (!grassTexture.loadFromImage(this->imgMgr.get_image("../img/floor.png"))) {
 		cout << "Failed to load Floor img.";
@@ -38,26 +37,25 @@ void GameField::loadFont() {
 		cout << "Could not load thunderstrike.ttf";
 	}
 	textHp.setFont(font);
-	textHp.setString(to_string(playerHp));
+	textHp.setString("HP: " + to_string(playerHp));
 	textHp.setCharacterSize(24);
 	textHp.setFillColor(sf::Color::Yellow);
 	textHp.setPosition(0, 550);
 
 	textScore.setFont(font);
-	textScore.setString(to_string(score));
+	textScore.setString("Score: " + to_string(score));
 	textScore.setCharacterSize(24);
 	textScore.setFillColor(sf::Color::Yellow);
 	textScore.setPosition(0, 500);
 }
 
 void GameField::setTextScore(int score) {
-	textScore.setString(to_string(score));
+	textScore.setString("Score: " + to_string(score));
 }
 
 void GameField::setTextHp(int hp) {
-	this->textHp.setString(to_string(hp));
+	this->textHp.setString("HP: " + to_string(hp));
 }
-
 
 void GameField::drawBackground(sf::RenderTarget& target, sf::RenderStates states) const {
 	target.draw(backSprite);
