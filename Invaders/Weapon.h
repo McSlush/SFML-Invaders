@@ -7,7 +7,6 @@
 
 using namespace std;
 
-//TODO: This is copied from Target. go through it...
 class Weapon : public sf::Drawable {
 protected:
 	float x, y;

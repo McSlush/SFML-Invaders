@@ -57,7 +57,6 @@ bool Invader2::collisionCar(Car* c) const {
 
 void Invader2::moveTarget() {
 	totTime += curTime;
-	//TODO check the value up. get it from main somehow... base on window size
 	float xBoundLeft = 20;
 	float xBoundRight = 520;
 	float spriteX = invaderSprite.getPosition().x;
