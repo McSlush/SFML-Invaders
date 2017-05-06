@@ -30,7 +30,6 @@ void Menu::initSprite() {
 	sf::Vector2i spriteFrameSize(600, 600);
 	menuSprite.setTexture(menuTexture);
 	menuSprite.setTextureRect(sf::IntRect(0, 0, spriteFrameSize.x, spriteFrameSize.y));
-	//menuSprite.setScale(1.0f, 1.0f);
 	menuSprite.setPosition(0, 0);
 }
 

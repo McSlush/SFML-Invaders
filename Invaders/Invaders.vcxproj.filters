@@ -102,6 +102,9 @@
     <ClCompile Include="Game.cpp">
       <Filter>Source Files\State Files</Filter>
     </ClCompile>
+    <ClCompile Include="GameLoop.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Invader.h">
@@ -167,10 +170,16 @@
     <ClInclude Include="Game.h">
       <Filter>Header Files\State Files</Filter>
     </ClInclude>
+    <ClInclude Include="GameLoop.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="Invaders.rc">
       <Filter>Resource Files</Filter>
     </ResourceCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>
